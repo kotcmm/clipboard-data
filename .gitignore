@@ -1,0 +1,5 @@
+build
+build/Debug
+build/Release
+
+node_modules

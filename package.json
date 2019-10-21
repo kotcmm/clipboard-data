@@ -1,0 +1,17 @@
+{
+  "name": "clipboard-data",
+  "version": "0.0.1",
+  "description": "剪切板操作",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clipboard"
+  ],
+  "author": "caipeiyu",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "nan": "^2.14.0"
+  }
+}
