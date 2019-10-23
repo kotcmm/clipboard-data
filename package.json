@@ -4,11 +4,17 @@
   "description": "剪切板操作",
   "main": "index.js",
   "scripts": {
+    "install": "node-gyp rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "gypfile": true,
   "keywords": [
     "clipboard"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kotcmm/clipboard-data.git"
+  },
   "author": "caipeiyu",
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {

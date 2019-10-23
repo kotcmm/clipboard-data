@@ -1,9 +1,15 @@
 {
   "targets": [{
     "target_name": "ClipboardData",
+    "dependencies" : [
+      "gyp/libpng.gyp:libpng"
+    ],
     "include_dirs" : [
       "src",
       "modules/clip",
+      "modules/lpng",
+      "modules/zlib",
+      "configs",
       "<!(node -e \"require('nan')\")"
     ],
     "sources": [
