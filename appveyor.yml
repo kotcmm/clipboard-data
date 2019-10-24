@@ -18,10 +18,10 @@ clone_depth: 10
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
+  - git submodule update --init --recursive
   - npm install
 
 build_script:
-  - npm test
   - npm run prebuild-node
   - npm run prebuild-node-ia32
   - npm run prebuild-electron

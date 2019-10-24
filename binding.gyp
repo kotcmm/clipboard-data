@@ -18,8 +18,21 @@
       "modules/clip/image.cpp"
     ],
     "conditions": [
-        ["OS=='linux'", {
-            "sources": [ "modules/clip/clip_x11.cpp"]
+        ["OS not in ['mac', 'win']", {
+            "sources": [ "modules/clip/clip_x11.cpp"],
+            "cflags": [
+              "<!(pkg-config --cflags libx11)",
+              "-Wno-missing-field-initializers",
+              "-Wno-deprecated-declarations",
+            ],
+            "link_settings": {
+              "ldflags": [
+                "<!(pkg-config --libs-only-L --libs-only-other libx11)",
+              ],
+              "libraries": [
+                "<!(pkg-config --libs-only-l libx11)",
+              ],
+            }
         }],
 
         ["OS=='mac'", {

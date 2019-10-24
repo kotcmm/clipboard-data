@@ -7,7 +7,7 @@ RUN apt-get install --quiet --yes \
     pkg-config \
     clang \
     python \
-    libsecret-1-dev
+    libx11-dev
 
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 RUN apt-get install -y nodejs

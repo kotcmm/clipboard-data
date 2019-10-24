@@ -34,7 +34,7 @@ addons:
     packages:
       - xvfb
       - gnome-keyring
-      - libsecret-1-dev
+      - libx11-dev
       - python-gnomekeyring
 
 before_script:
