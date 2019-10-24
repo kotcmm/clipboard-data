@@ -38,8 +38,9 @@ void SetText(const FunctionCallbackInfo<Value> &args)
         return;
     }
 
-    Local<Context> context = args.GetIsolate()->GetCurrentContext();
-    String::Utf8Value str(isolate, args[0]);
+    // Local<Context> context = args.GetIsolate()->GetCurrentContext();
+    Nan::Utf8String str(args[0]);
+    // String::Utf8Value str(isolate, args[0]);
     std::string cppStr(*str);
     clip::set_text(cppStr);
 }
