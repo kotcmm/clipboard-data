@@ -20,9 +20,8 @@
     "conditions": [
         ["OS not in ['mac', 'win']", {
             "sources": [ "modules/clip/clip_x11.cpp"],
-          "cflags": [
-            " -fexceptions"
-          ]
+            'cflags!': [ '-fno-exceptions' ],
+            'cflags_cc!': [ '-fno-exceptions' ]
         }],
 
         ["OS=='mac'", {
@@ -30,9 +29,7 @@
             "xcode_settings": {
               "GCC_ENABLE_CPP_EXCEPTIONS": "YES"
             },
-            "cflags": [
-              " -fexceptions"
-            ]
+            "cflags": ["-fexceptions"]
         }],
 
         ["OS=='win'", {
