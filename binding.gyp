@@ -19,11 +19,20 @@
     ],
     "conditions": [
         ["OS not in ['mac', 'win']", {
-            "sources": [ "modules/clip/clip_x11.cpp"]
+            "sources": [ "modules/clip/clip_x11.cpp"],
+          "cflags": [
+            " -fexceptions"
+          ]
         }],
 
         ["OS=='mac'", {
-            "sources": [ "modules/clip/clip_osx.mm"]
+            "sources": [ "modules/clip/clip_osx.mm"],
+            "xcode_settings": {
+              "GCC_ENABLE_CPP_EXCEPTIONS": "YES"
+            },
+            "cflags": [
+              " -fexceptions"
+            ]
         }],
 
         ["OS=='win'", {
