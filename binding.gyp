@@ -21,16 +21,16 @@
         ["OS not in ['mac', 'win']", {
             "sources": [ "modules/clip/clip_x11.cpp"],
             "cflags": [
-              "<!(pkg-config --cflags libx11)",
+              "<!(pkg-config --cflags libx11-devel)",
               "-Wno-missing-field-initializers",
               "-Wno-deprecated-declarations",
             ],
             "link_settings": {
               "ldflags": [
-                "<!(pkg-config --libs-only-L --libs-only-other libx11)",
+                "<!(pkg-config --libs-only-L --libs-only-other libx11-devel)",
               ],
               "libraries": [
-                "<!(pkg-config --libs-only-l libx11)",
+                "<!(pkg-config --libs-only-l libx11-devel)",
               ],
             }
         }],
