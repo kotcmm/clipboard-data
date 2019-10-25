@@ -18,7 +18,7 @@ git:
 branches:
   only:
     - master
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    - /^v\d+\.\d+\.\d+?(-\S*)?$/
 
 services:
   - docker
