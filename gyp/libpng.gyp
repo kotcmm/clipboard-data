@@ -7,7 +7,7 @@
             "target_name" : "libpng",
             "type" : "static_library",
             "include_dirs": [
-                "../configs",
+                "../src/configs",
                 "../modules/lpng"
             ],
             "sources" : [

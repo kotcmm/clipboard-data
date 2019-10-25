@@ -6,63 +6,37 @@
 namespace ClipboardData
 {
 
-using v8::Context;
-using v8::Exception;
-using v8::FunctionCallbackInfo;
-using v8::Isolate;
-using v8::Local;
-using v8::NewStringType;
-using v8::Object;
-using v8::String;
-using v8::Value;
-
-void GetText(const FunctionCallbackInfo<Value> &args)
+NAN_METHOD(GetText)
 {
-    Isolate *isolate = args.GetIsolate();
     std::string value;
     clip::get_text(value);
-    args.GetReturnValue().Set(String::NewFromUtf8(
-                                  isolate, value.c_str(), NewStringType::kNormal)
-                                  .ToLocalChecked());
+    info.GetReturnValue().Set(Nan::New(value).ToLocalChecked());
 }
 
-void SetText(const FunctionCallbackInfo<Value> &args)
+NAN_METHOD(SetText)
 {
-    Isolate *isolate = args.GetIsolate();
-    if (args.Length() < 1 || !args[0]->IsString())
+    if (info.Length() < 1 || !info[0]->IsString())
     {
-        isolate->ThrowException(Exception::TypeError(
-            String::NewFromUtf8(
-                isolate, "Invalid argument provided. Must be of type string.", NewStringType::kNormal)
-                .ToLocalChecked()));
+        Nan::ThrowTypeError("Invalid argument provided. Must be of type string.");
         return;
     }
 
-    // Local<Context> context = args.GetIsolate()->GetCurrentContext();
-    Nan::Utf8String str(args[0]);
-    // String::Utf8Value str(isolate, args[0]);
+    Nan::Utf8String str(info[0]);
     std::string cppStr(*str);
     clip::set_text(cppStr);
 }
 
-void GetImage(const FunctionCallbackInfo<Value> &args)
+NAN_METHOD(GetImage)
 {
-    Isolate *isolate = args.GetIsolate();
     if (!clip::has(clip::image_format()))
     {
-        isolate->ThrowException(Exception::TypeError(
-            String::NewFromUtf8(
-                isolate, "Clipboard doesn't contain an image.", NewStringType::kNormal)
-                .ToLocalChecked()));
+        Nan::ThrowTypeError("Clipboard doesn't contain an image.");
     }
 
     clip::image img;
     if (!clip::get_image(img))
     {
-        isolate->ThrowException(Exception::TypeError(
-            String::NewFromUtf8(
-                isolate, "Error getting image from clipboard.", NewStringType::kNormal)
-                .ToLocalChecked()));
+        Nan::ThrowError("Error getting image from clipboard.");
     }
 
     auto errorHandler = [](png_structp pngPtr, png_const_charp message) {
@@ -132,16 +106,20 @@ void GetImage(const FunctionCallbackInfo<Value> &args)
     png_free(pngPtr, row);
     png_write_end(pngPtr, nullptr);
     png_destroy_write_struct(&pngPtr, &infoPtr);
-    args.GetReturnValue().Set(Nan::CopyBuffer(reinterpret_cast<char *>(&encoded[0]), encoded.size()).ToLocalChecked());
+    info.GetReturnValue().Set(Nan::CopyBuffer(reinterpret_cast<char *>(&encoded[0]), encoded.size()).ToLocalChecked());
 }
 
-void Initialize(Local<Object> exports)
+NAN_MODULE_INIT(Init)
 {
-    NODE_SET_METHOD(exports, "getText", GetText);
-    NODE_SET_METHOD(exports, "setText", SetText);
-    NODE_SET_METHOD(exports, "getImage", GetImage);
+    Nan::SetMethod(target, "getText", GetText);
+    Nan::SetMethod(target, "setText", SetText);
+    Nan::SetMethod(target, "getImage", GetImage);
 }
 
-NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize);
+#if NODE_MAJOR_VERSION >= 10
+NAN_MODULE_WORKER_ENABLED(NODE_GYP_MODULE_NAME, Init)
+#else
+NODE_MODULE(NODE_GYP_MODULE_NAME, Init)
+#endif
 
 } // namespace ClipboardData

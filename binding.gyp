@@ -9,7 +9,7 @@
       "modules/clip",
       "modules/lpng",
       "modules/zlib",
-      "configs",
+      "src/configs",
       "<!(node -e \"require('nan')\")"
     ],
     "sources": [
