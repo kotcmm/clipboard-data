@@ -1,4 +1,4 @@
-export declare function setText(value: string);
+export declare function setText(value: string): void;
 
 export declare function getText(): string | undefined;
 

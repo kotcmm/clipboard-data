@@ -1,6 +1,6 @@
 {
     "name": "clipboard-data",
-    "version": "0.0.3-beta.4",
+    "version": "0.0.3-beta.5",
     "description": "剪切板操作",
     "main": "./lib/clipboard-data.js",
     "typings": "clipboard-data.d.ts",
