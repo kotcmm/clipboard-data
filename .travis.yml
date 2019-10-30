@@ -1,17 +1,15 @@
 language: node_js
 sudo: required
 dist: trusty
-os:
-  - linux
-  - osx
-node_js: 12
 
-env:
-  - |
-    CC=gcc CXX=gcc npm_config_clang=1
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      CC=g++ CXX=g++ npm_config_clang=1
-    fi
+jobs:
+  include:
+    - os: linux
+      env: CC=gcc CXX=gcc npm_config_clang=1
+    - os: osx
+      env: CC=g++ CXX=g++ npm_config_clang=1
+
+node_js: 12
 
 notifications:
   email: false
