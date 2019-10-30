@@ -20,7 +20,10 @@
         ["OS not in ['mac', 'win']", {
             "sources": [ "modules/clip/clip_x11.cpp"],
             'cflags!': [ '-fno-exceptions' ],
-            'cflags_cc!': [ '-fno-exceptions' ]
+            'cflags_cc!': [ '-fno-exceptions' ],
+            'defines': [
+              'HAVE_PNG_H=1',
+            ]
         }],
 
         ["OS=='mac'", {
