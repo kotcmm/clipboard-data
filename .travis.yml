@@ -7,7 +7,7 @@ jobs:
     - os: osx
       env: CC=gcc CXX=gcc npm_config_clang=1
     - os: linux
-      env: CC=g++ CXX=g++ npm_config_clang=1
+      env: CC=clang CXX=clang++ npm_config_clang=1
 
 node_js: 12
 
